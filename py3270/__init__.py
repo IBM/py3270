@@ -531,7 +531,7 @@ class Emulator(object):
 
         self.exec_command(b'Snap')
         cmd = self.exec_command(b'Snap(Ascii)')
-        screen = [byteOutput.decode('ascii') for byteOutput in cmd.data]
+        screen = [byte_output.decode('ascii') for byte_output in cmd.data]
 
         return screen
 
@@ -541,17 +541,17 @@ class Emulator(object):
             otherwise.
         """
 
-        sleepTime = .5
-        tryCount = 0
+        sleep_time = .5
+        try_count = 0
 
-        while tryCount < timeout:
-            screenBuffer = self.get_screen()
+        while try_count < timeout:
+            screen_buffer = self.get_screen()
 
-            for bufferSegment in screenBuffer:
-                if string in bufferSegment:
+            for buffer_segment in screen_buffer:
+                if string in buffer_segment:
                     return(True)
             
-            tryCount += sleepTime
-            time.sleep(sleepTime)
+            try_count += sleep_time
+            time.sleep(sleep_time)
         
         raise VerifyError(string, timeout, self)
